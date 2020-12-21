@@ -71,7 +71,7 @@ broker:bcs account:12341356 files:8 lastdate:20181016
 Пример:
 
 ```cpp
-const path p{"mydir/file.txt"};
+
 std::cout << p.filename() << std::endl
           << p.stem() << std::endl
           << p.extension() << std::endl;
