@@ -7,7 +7,6 @@
 #include <boost/filesystem/path.hpp>
 #include <utility>
 using path = boost::filesystem::path;
-
 using iterator = boost::filesystem::directory_iterator;
 using entry = boost::filesystem::directory_entry;
 using string = std::string;
@@ -16,7 +15,6 @@ struct File {
   string Id;
   string Date;
 };
-
 struct Account{
  public:
   Account(string broker, string id, int files, string year,
@@ -28,7 +26,6 @@ struct Account{
   string GetId();
   int GetFiles();
   string GetData();
-
  private:
   string Broker;
   string Id;
@@ -40,11 +37,8 @@ struct Account{
 class MyFilesystem{
  public:
   explicit MyFilesystem(boost::filesystem::path  myPath) : MyPath(std::move(myPath)) {}
-
   void PrintAllFiles();
-
   int IsAccExist(File &f);
-
   void PrintTotalInformation();
  private:
   void PrintAllFiles(const path &p);
@@ -53,5 +47,4 @@ class MyFilesystem{
   path MyPath;
   std::vector<Account> AccsList;
 };
-
 #endif // INCLUDE_MYFILESYSTEM_HPP_
