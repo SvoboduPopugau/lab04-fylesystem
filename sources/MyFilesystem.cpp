@@ -34,8 +34,14 @@ void MyFilesystem::PrintAllFiles() {
           std::cout << "\t" << "Symlink: " << x.path() << std::endl;
         }
       }
-    } else if(boost::filesystem::is_symlink(MyPath)){                    //TODO
+    } else if(boost::filesystem::is_symlink(MyPath)){
       std::cout << "Symlink: " << MyPath << std::endl;
+      path link = boost::filesystem::read_symlink(MyPath);
+      if(boost::filesystem::is_regular_file(link))
+        std::cout << link.branch_path().filename().string() <<\
+            link.filename().string() << std::endl;
+      if(boost::filesystem::is_directory(link))
+        PrintAllFiles(link);
     }
   }
   std::cout << std::endl;
@@ -70,7 +76,13 @@ void MyFilesystem::PrintAllFiles(const path& p) {
         }
       }
     } else if(boost::filesystem::is_symlink(p)){
-      std::cout << "Symlink: " << p << std::endl;                       //TODO
+      std::cout << "Symlink: " << p << std::endl;
+      path link = boost::filesystem::read_symlink(p);
+      if(boost::filesystem::is_regular_file(link))
+        std::cout << link.branch_path().filename().string() <<\
+            link.filename().string() << std::endl;
+      if(boost::filesystem::is_directory(link))
+        PrintAllFiles(link);
     }
   }
 }
