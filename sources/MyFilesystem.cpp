@@ -93,30 +93,30 @@ bool MyFilesystem::IsFileNameTrue(const path& p) {
   if (name.substr(name.size()-4) == ".old")
     return false;
   unsigned count = 0;
-  for(char i : name){
+  for(const char &i : name){
     if (i == '_'){
       ++count;
     }
   }
-  if(count!=2)
+  if(count!=DASHCOUNT)
     return false;
   string account = name.substr(name.find('_')+1,
                                     name.rfind('_') - name.find('_') - 1);
-  for(char i : account){
+  for(const char &i : account){
     if(!(i >= '0' && i<= '9'))
       return false;
   }
   string date = name.substr(name.rfind('_')+1);
-  for(char i : date){
+  for(const char &i : date){
     if(!(i >= '0' && i<= '9'))
       return false;
   }
-  string temp(date.substr(date.size()-2));
+  string temp(date.substr(date.size()-DAYCHARS));
   int day_val = std::stoi(temp);
-  if(day_val > 31)
+  if(day_val > MAXDAY)
     return false;
-  temp = date.substr(4,2);
-  if(std::stoi(temp) > 12)
+  temp = date.substr(YEARCHARS,MONTHSCHARS);
+  if(std::stoi(temp) > MAXMONTH)
     return false;
   return true;
 }

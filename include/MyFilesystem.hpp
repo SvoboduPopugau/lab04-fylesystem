@@ -10,6 +10,12 @@ using path = boost::filesystem::path;
 using iterator = boost::filesystem::directory_iterator;
 using entry = boost::filesystem::directory_entry;
 using string = std::string;
+const int DASHCOUNT = 2;
+const int MAXDAY = 31;
+const int MAXMONTH = 12;
+const int DAYCHARS = 2;
+const int MONTHSCHARS = 2;
+const int YEARCHARS = 4;
 struct File {
   string Broker;
   string Id;
